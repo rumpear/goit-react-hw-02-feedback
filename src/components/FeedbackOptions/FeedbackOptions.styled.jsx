@@ -33,7 +33,7 @@ export const Button = styled.button`
   cursor: pointer;
 
   :hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(77, 77, 77, 0.1);
   }
 
   :last-child {
