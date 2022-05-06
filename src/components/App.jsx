@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
+import { Section } from './Section';
 import { Statistics } from './Statistics';
 import { FeedbackOptions } from './FeedbackOptions';
-import { Section } from './Section';
 import { Notification } from './Notification';
+
 import styled from 'styled-components';
 
 export class App extends Component {
@@ -20,13 +22,14 @@ export class App extends Component {
   };
 
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
+    const stateValues = Object.values(this.state);
+    const totalValues = stateValues.reduce((acc, item) => acc + item, 0);
+    return totalValues;
   };
 
   countPositiveFeedbackPercentage = () => {
     const totalFeedback = this.countTotalFeedback();
-    let { good } = this.state;
+    const { good } = this.state;
 
     return Math.round((100 / totalFeedback) * good);
   };
@@ -47,7 +50,7 @@ export class App extends Component {
       <Container>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            options={Object.keys(state)}
             onLeaveFeedback={handleBtn}
           />
         </Section>
@@ -69,6 +72,7 @@ export class App extends Component {
   };
 }
 
+// * styles
 const Container = styled.div`
   padding: 40px;
   width: 400px;
